@@ -1,7 +1,9 @@
 from tkinter import Tk, Label, Button, StringVar
+import random
 
 class MyGUI:
     LABEL_TEXT = [
+        "click me!",
         "This is just an ordinary GUI.",
         "Alas, it is not.",
         "We can change text!",
@@ -33,6 +35,34 @@ class MyGUI:
         self.label_index += 1
         self.label_index %= len(self.LABEL_TEXT) # word wrap
         self.label_text.set(self.LABEL_TEXT[self.label_index])
+
+
+def get_deck():
+    deck = []
+    # The below just creates the deck.
+    for color in ["RED", "GREEN", "BLUE", "YELLOW"]:
+        # Cards 0-9
+        for i in range(1): # TODO: SET BACK TO 10
+            deck.append(color + " " + str(i))
+        # Another set of 1-9
+        for i in range(1, 2):  # TODO: SET THE 2 to 10
+            deck.append(color + " " + str(i))
+        # Action Cards
+        deck.append(color + " REVERSE")
+        deck.append(color + " REVERSE")
+        deck.append(color + " SKIP")
+        deck.append(color + " SKIP")
+        deck.append(color + " DRAW 2")
+        deck.append(color + " DRAW 2")
+
+    # Wild Cards
+    for i in range(4):
+        deck.append("WILDCARD")
+        deck.append("WILD +4")
+
+    random.shuffle(deck)
+    return deck
+
 
 root = Tk()
 my_gui = MyGUI(root)
